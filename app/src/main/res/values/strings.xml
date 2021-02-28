@@ -2,4 +2,6 @@
     <string name="app_name">HomeWork01</string>
     <string name="welcomeText">Добро пожаловать!</string>
     <string name="enterNameText">Введите имя пользователя:</string>
+    <dimen name="button_width">80dp</dimen>
+    <dimen name="button_height">60dp</dimen>
 </resources>
