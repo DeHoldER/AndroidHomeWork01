@@ -1,5 +1,6 @@
 package ru.geekbrains.homework01;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final static String keyCalculatorState = "CalculatorState";
 
     CalculatorState calculator;
 
@@ -32,6 +35,27 @@ public class MainActivity extends AppCompatActivity {
     Button mButtonMultiply;
     Button mButtonDivide;
     Button mButtonEquals;
+
+    @Override
+    public void onSaveInstanceState (@NonNull Bundle instanceState) {
+        super.onSaveInstanceState(instanceState);
+        instanceState.putParcelable(keyCalculatorState, calculator);
+    }
+
+    @Override
+    protected void onRestoreInstanceState (@NonNull Bundle instanceState) {
+        super.onRestoreInstanceState(instanceState);
+        calculator = instanceState.getParcelable(keyCalculatorState);
+
+
+        if (calculator.getAction() != '0') {
+            actionChar.setText(calculator.getAction() + "  ");
+        }
+        if (calculator.stringBuilder.length() != 0) {
+        printNumOnScreen();
+        } else calculator.getStringResult();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

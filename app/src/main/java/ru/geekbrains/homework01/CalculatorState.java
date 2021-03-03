@@ -1,6 +1,30 @@
 package ru.geekbrains.homework01;
 
-public class CalculatorState {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CalculatorState implements Parcelable {
+    protected CalculatorState(Parcel in) {
+        firstNumber = in.readDouble();
+        secondNumber = in.readDouble();
+        isFirstNumEmpty = in.readByte() != 0;
+        isCurrentFractionalNumber = in.readByte() != 0;
+        isFractionalNumber = in.readByte() != 0;
+        action = (char) in.readInt();
+    }
+
+    public static final Creator<CalculatorState> CREATOR = new Creator<CalculatorState>() {
+        @Override
+        public CalculatorState createFromParcel(Parcel in) {
+            return new CalculatorState(in);
+        }
+
+        @Override
+        public CalculatorState[] newArray(int size) {
+            return new CalculatorState[size];
+        }
+    };
+
     public void totalReset() {
         firstNumber = 0;
         secondNumber = 0;
@@ -109,4 +133,18 @@ public class CalculatorState {
         this.action = action;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(firstNumber);
+        dest.writeDouble(secondNumber);
+        dest.writeByte((byte) (isFirstNumEmpty ? 1 : 0));
+        dest.writeByte((byte) (isCurrentFractionalNumber ? 1 : 0));
+        dest.writeByte((byte) (isFractionalNumber ? 1 : 0));
+        dest.writeInt((int) action);
+    }
 }
