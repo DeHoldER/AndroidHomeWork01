@@ -51,7 +51,7 @@ public class CalculatorState {
         }
     }
 
-    public void addCurrentNumber() {
+    public void addCurrentNumber() throws Exception {
         if (isFirstNumEmpty) {
             firstNumber = Double.parseDouble(stringBuilder.toString());
             if (action == '-') {
@@ -72,15 +72,11 @@ public class CalculatorState {
         String out = String.valueOf(firstNumber);
         Double outDouble = firstNumber;
         int outInt;
-        // Если не стоит флаг, что число дробное, или если на конце .0, то делаем из числа int и делаем из этого стрингу
+        // Если не стоит флаг, что число дробное, или если на конце .0, то округляем строку форматом
         if (!isFractionalNumber || out.endsWith(".0")) {
-//            outInt = outDouble.intValue();
             out = String.format("%.0f", firstNumber);
         } else {
             out = String.valueOf(outDouble);
-//            if (out.endsWith(".0")) {
-//                out = out.substring(0, out.length() - 2);
-//            }
         }
         return out;
     }

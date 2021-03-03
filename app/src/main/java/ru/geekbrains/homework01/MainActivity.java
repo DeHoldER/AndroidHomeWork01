@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
             calculator.stringBuilder.append(button.getText().toString());
             printNumOnScreen();
         }
-        logPrnt();
     }
 
     private void onFuncButtonClick(Button button) {
@@ -129,20 +128,26 @@ public class MainActivity extends AppCompatActivity {
             if (calculator.stringBuilder.length() == 0) {
                 changeAction(button);
             } else {
+                try {
                 calculator.addCurrentNumber();
+                } catch (Exception e) {
+                    printNumOnScreen("Error!");
+                }
                 changeAction(button);
                 printNumOnScreen(calculator.getStringResult());
             }
         }
         if (button == mButtonEquals) {
             if (calculator.getAction() != '0') {
-                calculator.addCurrentNumber();
+                try {
+                    calculator.addCurrentNumber();
+                } catch (Exception e) {
+                    printNumOnScreen("Error!");
+                }
                 clearAction();
                 printNumOnScreen(calculator.getStringResult());
             }
         }
-        logPrnt();
-
     }
 
     private void clearAction() {
@@ -175,14 +180,5 @@ public class MainActivity extends AppCompatActivity {
             calculator.stringBuilder.append(".");
             calculator.setCurrentFractionalNumber(true);
         }
-    }
-
-    private void logPrnt() {
-        System.out.println("aplog (sb): " + calculator.stringBuilder.toString());
-        System.out.println("aplog (firstNum): " + calculator.getFirstNumber());
-        System.out.println("aplog (bufNum): " + calculator.getSecondNumber());
-//        System.out.println("aplog (isFirstCalc): " + calculator.isFirstCalculation());
-//        System.out.println("aplog (curFracNum): " + calculator.isCurrentFractionalNumber());
-//        System.out.println("aplog (secondNum): " + calculator.getSecondNumber());
     }
 }
