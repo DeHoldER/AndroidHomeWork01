@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HomeWork01</string>
+    <string name="app_name">Калькулятор</string>
     <string name="welcomeText">Добро пожаловать!</string>
     <string name="enterNameText">Введите имя пользователя:</string>
     <dimen name="button_width">80dp</dimen>
