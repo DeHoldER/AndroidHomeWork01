@@ -95,7 +95,6 @@ public class CalculatorState implements Parcelable {
     public String getStringResult() {
         String out = String.valueOf(firstNumber);
         Double outDouble = firstNumber;
-        int outInt;
         // Если не стоит флаг, что число дробное, или если на конце .0, то округляем строку форматом
         if (!isFractionalNumber || out.endsWith(".0")) {
             out = String.format("%.0f", firstNumber);

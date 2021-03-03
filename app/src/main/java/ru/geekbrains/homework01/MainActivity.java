@@ -37,24 +37,29 @@ public class MainActivity extends AppCompatActivity {
     Button mButtonEquals;
 
     @Override
-    public void onSaveInstanceState (@NonNull Bundle instanceState) {
+    public void onSaveInstanceState(@NonNull Bundle instanceState) {
         super.onSaveInstanceState(instanceState);
         instanceState.putParcelable(keyCalculatorState, calculator);
     }
 
     @Override
-    protected void onRestoreInstanceState (@NonNull Bundle instanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle instanceState) {
         super.onRestoreInstanceState(instanceState);
         calculator = instanceState.getParcelable(keyCalculatorState);
-
 
         if (calculator.getAction() != '0') {
             actionChar.setText(calculator.getAction() + "  ");
         }
         if (calculator.stringBuilder.length() != 0) {
-        printNumOnScreen();
-        } else calculator.getStringResult();
+            printNumOnScreen();
+        } else printNumOnScreen(calculator.getStringResult());
+        aplog();
+    }
 
+    void aplog() {
+        System.out.println("aplog (sb length): " + calculator.stringBuilder.length());
+        System.out.println("aplog (sb): " + calculator.stringBuilder.toString());
+        System.out.println("aplog (firstNum): " + calculator.getFirstNumber());
     }
 
     @Override
@@ -161,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 changeAction(button);
             } else {
                 try {
-                calculator.addCurrentNumber();
+                    calculator.addCurrentNumber();
                 } catch (Exception e) {
                     printNumOnScreen("Error!");
                 }
