@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    CalculatorState calculator = new CalculatorState();
+    CalculatorState calculator;
 
     TextView outputScreen;
     TextView actionChar;
@@ -35,10 +35,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        calculator = new CalculatorState();
+
+        initView();
+        initButtonListeners();
+    }
+
+    private void initView() {
         outputScreen = findViewById(R.id.output_screen);
         actionChar = findViewById(R.id.action_char);
 
@@ -60,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
         mButtonMultiply = findViewById(R.id.button_multiply);
         mButtonDivide = findViewById(R.id.button_divide);
         mButtonEquals = findViewById(R.id.button_equals);
+    }
 
+    private void initButtonListeners() {
         addButtonListener(mButton0);
         addButtonListener(mButton1);
         addButtonListener(mButton2);
