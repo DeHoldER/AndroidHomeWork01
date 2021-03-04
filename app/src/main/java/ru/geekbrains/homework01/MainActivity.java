@@ -12,29 +12,29 @@ public class MainActivity extends AppCompatActivity {
 
     private final static String keyCalculatorState = "CalculatorState";
 
-    CalculatorState calculator;
+    private CalculatorState calculator;
 
-    TextView outputScreen;
-    TextView actionChar;
+    private TextView mOutputScreen;
+    private TextView mActionChar;
 
-    Button mButton0;
-    Button mButton1;
-    Button mButton2;
-    Button mButton3;
-    Button mButton4;
-    Button mButton5;
-    Button mButton6;
-    Button mButton7;
-    Button mButton8;
-    Button mButton9;
-    Button mButtonPt;
+    private Button mButton0;
+    private Button mButton1;
+    private Button mButton2;
+    private Button mButton3;
+    private Button mButton4;
+    private Button mButton5;
+    private Button mButton6;
+    private Button mButton7;
+    private Button mButton8;
+    private Button mButton9;
+    private Button mButtonPt;
 
-    Button mButtonCancel;
-    Button mButtonPlus;
-    Button mButtonMinus;
-    Button mButtonMultiply;
-    Button mButtonDivide;
-    Button mButtonEquals;
+    private Button mButtonCancel;
+    private Button mButtonPlus;
+    private Button mButtonMinus;
+    private Button mButtonMultiply;
+    private Button mButtonDivide;
+    private Button mButtonEquals;
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle instanceState) {
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         calculator = instanceState.getParcelable(keyCalculatorState);
 
         if (calculator.getAction() != '0') {
-            actionChar.setText(calculator.getAction() + "  ");
+            mActionChar.setText(calculator.getAction() + "  ");
         }
         if (calculator.stringBuilder.length() != 0) {
             printNumOnScreen();
@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        outputScreen = findViewById(R.id.output_screen);
-        actionChar = findViewById(R.id.action_char);
+        mOutputScreen = findViewById(R.id.output_screen);
+        mActionChar = findViewById(R.id.action_char);
 
         mButton0 = findViewById(R.id.button0);
         mButton1 = findViewById(R.id.button1);
@@ -121,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 calculator.totalReset();
-                outputScreen.setText("0");
-                actionChar.setText("   ");
+                mOutputScreen.setText("0");
+                mActionChar.setText("   ");
             }
         });
     }
@@ -188,32 +188,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clearAction() {
-        actionChar.setText("   ");
+        mActionChar.setText("   ");
         calculator.setAction('0');
     }
 
     private void changeAction(Button button) {
-        actionChar.setText(button.getText().toString() + "  ");
+        mActionChar.setText(button.getText().toString() + "  ");
         calculator.setAction(button.getText().toString().charAt(0));
     }
 
     private void printNumOnScreen() {
-        outputScreen.setText(calculator.stringBuilder);
+        mOutputScreen.setText(calculator.stringBuilder);
     }
 
     private void printNumOnScreen(String s) {
-        outputScreen.setText(s);
+        mOutputScreen.setText(s);
     }
 
     public void onButtonPointClick() {
         calculator.setFractionalNumber(true);
         if (calculator.stringBuilder.length() == 0) {
-            outputScreen.setText("0");
+            mOutputScreen.setText("0");
             calculator.stringBuilder.append(0);
         }
 
         if (!calculator.isCurrentFractionalNumber()) {
-            outputScreen.setText("." + outputScreen.getText());
+            mOutputScreen.setText("." + mOutputScreen.getText());
             calculator.stringBuilder.append(".");
             calculator.setCurrentFractionalNumber(true);
         }

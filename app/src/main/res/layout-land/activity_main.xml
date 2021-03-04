@@ -4,12 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        layout="@layout/bg_layout"
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleX="0"
-        android:scaleY="0" />
+        android:rotation="90"
+        android:scaleX="1"
+        android:scaleY="2.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg" />
 
     <include
         layout="@layout/activity_calculator"
